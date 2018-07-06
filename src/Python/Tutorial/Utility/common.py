@@ -3,6 +3,7 @@
 # See license file or visit www.open3d.org for details
 
 import copy
+import re
 from open3d import *
 from os import listdir, makedirs
 from os.path import exists, isfile, join, splitext
@@ -30,6 +31,11 @@ template_global_posegraph_optimized = folder_scene + \
         "global_registration_optimized.json"
 template_global_mesh = folder_scene + "integrated.ply"
 
+def sorted_alphanum(l):
+    convert = lambda text: int(text) if text.isdigit() else text
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+    return sorted(l, key=alphanum_key)
+
 
 def get_file_list(path, extension=None):
     if extension is None:
@@ -37,7 +43,7 @@ def get_file_list(path, extension=None):
     else:
         file_list = [path + f for f in listdir(path)
                 if isfile(join(path, f)) and splitext(f)[1] == extension]
-    file_list.sort()
+    file_list = sorted_alphanum(file_list)
     return file_list
 
 
