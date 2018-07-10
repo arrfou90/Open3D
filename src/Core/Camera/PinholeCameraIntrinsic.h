@@ -31,13 +31,17 @@
 
 namespace three {
 
+enum class PinholeCameraIntrinsicParameters {
+    PrimeSenseDefault = 0,
+    Kinect2DepthCameraDefault = 1,
+    Kinect2ColorCameraDefault = 2,
+};
+
 class PinholeCameraIntrinsic : public IJsonConvertible
 {
 public:
-   static const PinholeCameraIntrinsic GetPrimeSenseDefault();
-
-public:
     PinholeCameraIntrinsic();
+    PinholeCameraIntrinsic(PinholeCameraIntrinsicParameters);
     PinholeCameraIntrinsic(int width, int height, double fx, double fy,
         double cx, double cy);
     ~PinholeCameraIntrinsic() override;

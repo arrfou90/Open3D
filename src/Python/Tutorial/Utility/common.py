@@ -3,7 +3,7 @@
 # See license file or visit www.open3d.org for details
 
 import copy
-from py3d import *
+from open3d import *
 from os import listdir, makedirs
 from os.path import exists, isfile, join, splitext
 
@@ -60,6 +60,12 @@ def make_folder(path_folder):
 #######################
 flip_transform = [[1, 0, 0, 0], [0, -1, 0, 0], [0, 0, -1, 0], [0, 0, 0, 1]]
 
+def draw_pcd(pcd):
+    pcd_temp = copy.deepcopy(pcd)
+    pcd_temp.transform(flip_transform)
+    draw_geometries([pcd_temp])
+
+
 def draw_registration_result(source, target, transformation):
     source_temp = copy.deepcopy(source)
     target_temp = copy.deepcopy(target)
@@ -69,6 +75,7 @@ def draw_registration_result(source, target, transformation):
     source_temp.transform(flip_transform)
     target_temp.transform(flip_transform)
     draw_geometries([source_temp, target_temp])
+    
 
 
 def draw_registration_result_original_color(source, target, transformation):

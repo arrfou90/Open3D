@@ -2,7 +2,7 @@
 # The MIT License (MIT)
 # See license file or visit www.open3d.org for details
 
-from py3d import *
+from open3d import *
 import numpy as np
 import copy
 
@@ -40,8 +40,8 @@ if __name__ == "__main__":
         source.transform(reg_p2l.transformation)
         vis.update_geometry()
         vis.reset_view_point(True)
-        # vis.update_renderer() # need to be discussed
         vis.poll_events()
+        vis.update_renderer()
         if save_image:
             vis.capture_screen_image("temp_%04d.jpg" % i)
     vis.destroy_window()
